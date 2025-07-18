@@ -1,56 +1,74 @@
 
-  import TailwindIndicator from "@/components/ui/tailwind-indicator";
-  import { AUTHOR, FAVICONS, HEAD, KEYWORDS, OPEN_GRAPH } from "@/config/seo";
-  import { cn, getBaseUrl } from "@/lib/utils";
-  import "@/styles/tailwind.css";
-  import { Toaster } from "@/components/ui/sonner";
-  import { HeadType } from "@/types";
   import { Analytics } from "@vercel/analytics/next";
   import { Metadata, Viewport } from "next";
   import { Geist as FontSans } from "next/font/google";
+  import { Toaster } from "@/components/ui/sonner";
+  import TailwindIndicator from "@/components/ui/tailwind-indicator";
+  import { AUTHOR, FAVICONS, HEAD, KEYWORDS, OPEN_GRAPH } from "@/config/seo";
+  import { cn, getBaseUrl } from "@/lib/utils";
+  import { HeadType } from "@/types";
+  import "@/styles/tailwind.css";
 
-  // Validate SEO configuration to ensure all required fields are present
-  // This helps catch missing or incomplete SEO setup early
-  if (!HEAD || HEAD.length === 0) {
-    console.error("⚠️ HEAD configuration is missing or empty");
-  }
-  if (!KEYWORDS || KEYWORDS.length === 0) {
-    console.warn("🔍 No keywords defined for SEO");
-  }
-  if (!AUTHOR || !AUTHOR.name) {
-    console.error("❌ Author information is missing");
-  }
-  if (!FAVICONS || !FAVICONS.icon || FAVICONS.icon.length === 0) {
-    console.warn("🖼️ No favicons configured");
-  }
-  if (!OPEN_GRAPH || !OPEN_GRAPH.image || !OPEN_GRAPH.twitterImage) {
-    console.error("📱 OpenGraph configuration is incomplete");
-  }
+  // ============================================================================
+  // SEO CONFIGURATION VALIDATION
+  // ============================================================================
 
-  // Define the current page for SEO configuration
+  /**
+   * Validates SEO configuration to ensure all required fields are present.
+   * This helps catch missing or incomplete SEO setup early in development.
+   */
+  const validateSEOConfig = () => {
+    if (!HEAD || HEAD.length === 0) {
+      console.error("⚠️ HEAD configuration is missing or empty");
+    }
+    if (!KEYWORDS || KEYWORDS.length === 0) {
+      console.warn("🔍 No keywords defined for SEO");
+    }
+    if (!AUTHOR || !AUTHOR.name) {
+      console.error("❌ Author information is missing");
+    }
+    if (!FAVICONS || !FAVICONS.icon || FAVICONS.icon.length === 0) {
+      console.warn("🖼️ No favicons configured");
+    }
+    if (!OPEN_GRAPH || !OPEN_GRAPH.image || !OPEN_GRAPH.twitterImage) {
+      console.error("📱 OpenGraph configuration is incomplete");
+    }
+  };
+
+  // Run validation
+  validateSEOConfig();
+
+  // ============================================================================
+  // PAGE CONFIGURATION
+  // ============================================================================
+
   const PAGE = "Home";
-
-  // Get SEO configuration for the current page from the HEAD array
   const page = HEAD.find((page: HeadType) => page.page === PAGE) as HeadType;
 
-  // Configure the Geist font with Latin subset and variable font support
-  // This sets up the primary font for the application
+  // ============================================================================
+  // FONT CONFIGURATION
+  // ============================================================================
+
   const fontSans = FontSans({
     subsets: ["latin"],
     variable: "--font-sans",
     display: "swap",
   });
 
-  // Configure viewport settings for responsive design
-  // This ensures proper scaling and display on different devices
+  // ============================================================================
+  // VIEWPORT CONFIGURATION
+  // ============================================================================
+
   export const viewport: Viewport = {
     width: "device-width",
     initialScale: 1,
     themeColor: "#ffffff",
   };
 
-  // Configure comprehensive metadata for SEO and social sharing
-  // This includes all necessary meta tags for search engines and social media platforms
+  // ============================================================================
+  // METADATA CONFIGURATION
+  // ============================================================================
+
   export const metadata: Metadata = {
     // Basic metadata
     title: page.title,
@@ -60,7 +78,7 @@
     referrer: "origin-when-cross-origin",
     keywords: (KEYWORDS ?? []).join(", "),
 
-    // Author information for content attribution
+    // Author information
     authors: [
       {
         name: AUTHOR.name,
@@ -70,7 +88,7 @@
     creator: AUTHOR.name,
     publisher: AUTHOR.name,
 
-    // URL configurations for canonical links and RSS feed
+    // URL configurations
     metadataBase: new URL(getBaseUrl()),
     alternates: {
       canonical: getBaseUrl(),
@@ -83,24 +101,23 @@
       },
     },
 
-    // Apple web app configuration for iOS devices
+    // Apple web app configuration
     appleWebApp: {
       title: page.title,
       statusBarStyle: "default",
       capable: true,
     },
 
-    // Search engine crawling configuration
+    // Search engine configuration
     robots: {
       index: true,
       follow: true,
     },
 
-    // Favicon configuration for browser tabs and bookmarks
+    // Favicon configuration
     icons: FAVICONS,
 
     // OpenGraph metadata for social media sharing
-    // This enables rich previews when the site is shared on social platforms
     openGraph: {
       type: "website",
       locale: "en",
@@ -119,8 +136,7 @@
       ],
     },
 
-    // Twitter card metadata for Twitter sharing
-    // This enables rich previews when the site is shared on Twitter
+    // Twitter card metadata
     twitter: {
       card: "summary_large_image",
       title: page.title,
@@ -139,13 +155,15 @@
     },
   };
 
-  // Root layout component that wraps all pages
-  // This component provides the basic HTML structure and global providers
-  export default function RootLayout({
-    children,
-  }: {
+  // ============================================================================
+  // ROOT LAYOUT COMPONENT
+  // ============================================================================
+
+  interface RootLayoutProps {
     children: React.ReactNode;
-  }) {
+  }
+
+  export default function RootLayout({ children }: RootLayoutProps) {
     return (
       <html
         lang="en"
@@ -159,15 +177,12 @@
           )}
           suppressHydrationWarning={true}
         >
+          {/* Main content */}
           {children}
 
-          {/* Vercel Analytics for tracking */}
+          {/* Analytics and utilities */}
           <Analytics />
-          
-          {/* Tailwind CSS breakpoint indicator (development only) */}
           <TailwindIndicator />
-
-          {/* Toast notifications provider */}
           <Toaster />
         </body>
       </html>
