@@ -119,4 +119,11 @@
   body {
     @apply bg-background text-foreground;
   }
+  .text-grid-border\/60 {
+    color: rgb(229 229 229/.6)
+}
+.border-grid-border {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 229 229/var(--tw-border-opacity))
+}
 }

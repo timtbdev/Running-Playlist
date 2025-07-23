@@ -18,7 +18,7 @@ interface HeaderProps {
 
 export default function Header({ className }: HeaderProps) {
   return (
-    <header className={cn("sticky top-0 z-50 border-b bg-background", className)}>
+    <header className={cn("sticky top-0 z-50 border-b bg-background", className)} role="navigation">
       <div className="mx-auto max-w-5xl px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
