@@ -1,11 +1,12 @@
 "use client";
 
-import RunningManIcon from "@/icons/running-man-icon";
-import { LinkIcon } from "lucide-react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { LinkIcon } from "lucide-react";
+
+// UI Components
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -15,6 +16,13 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+
+// Icons
+import RunningManIcon from "@/icons/running-man-icon";
+
+// ============================================================================
+// TYPES & SCHEMAS
+// ============================================================================
 
 // URL validation schema
 const urlSchema = z.object({
@@ -39,6 +47,19 @@ const urlSchema = z.object({
 
 type UrlFormData = z.infer<typeof urlSchema>;
 
+// ============================================================================
+// COMPONENT PROPS TYPES
+// ============================================================================
+
+interface PlaylistLinkFormProps {
+  onSubmit: (data: UrlFormData) => void;
+  isLoading?: boolean;
+}
+
+// ============================================================================
+// COMPONENTS
+// ============================================================================
+
 // App Logo Component
 const AppLogo = () => (
   <div className="relative mx-auto flex size-16 items-center justify-center">
@@ -52,10 +73,7 @@ const AppLogo = () => (
 );
 
 // Form Component
-const PlaylistLinkForm = ({ onSubmit, isLoading = false }: {
-  onSubmit: (data: UrlFormData) => void;
-  isLoading?: boolean;
-}) => {
+const PlaylistLinkForm = ({ onSubmit, isLoading = false }: PlaylistLinkFormProps) => {
   const form = useForm<UrlFormData>({
     resolver: zodResolver(urlSchema),
     defaultValues: { url: "" },
@@ -80,7 +98,7 @@ const PlaylistLinkForm = ({ onSubmit, isLoading = false }: {
                       placeholder="https://open.spotify.com/playlist/28OAQven2H4fLmFsNEeVcY"
                       autoComplete="off"
                       disabled={isLoading}
-                      className="relative block h-12 w-full rounded-r-xl border-0 px-2 text-base placeholder:text-neutral-400 focus:border-0 focus:border-neutral-800 focus:outline-none focus:ring-0 focus:ring-neutral-800 sm:h-14 sm:px-3"
+                      className="relative block h-12 w-full rounded-r-xl border-0 px-2 text-base placeholder:text-neutral-400 sm:h-14 sm:px-3"
                     />
                   </FormControl>
                 </div>
@@ -103,10 +121,15 @@ const PlaylistLinkForm = ({ onSubmit, isLoading = false }: {
   );
 };
 
-// Main Hero Component
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+
 const Hero = () => {
+  // State
   const [isLoading, setIsLoading] = useState(false);
 
+  // Event Handlers
   const handleSubmitPlaylistLink = (data: UrlFormData) => {
     setIsLoading(true);
     // TODO: Implement playlist processing logic
