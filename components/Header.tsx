@@ -23,7 +23,7 @@ export default function Header({ className }: HeaderProps) {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <Avatar className="h-8 w-8">
+            <Avatar className="h-6 w-6">
               <AvatarImage src="/images/logo.png" alt="Logo" />
             </Avatar>
             <span className="font-semibold">Playlist.fan</span>

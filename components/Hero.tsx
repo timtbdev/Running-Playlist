@@ -115,17 +115,16 @@ const Hero = () => {
   };
 
   return (
-    <div className="grid-section relative overflow-clip border-grid-border [.grid-section_~_&]:border-t-0 border-b">
-      <div className="relative z-0 mx-auto max-w-grid-width border-grid-border py-10">
+    <div className="grid-section relative overflow-clip">
+      <div className="relative z-0 mx-auto max-w-grid-width py-10">
         <div className="pointer-events-none absolute inset-0 border-x border-grid-border [mask-image:linear-gradient(transparent,black)]" />
 
         <div className="relative mx-auto flex max-w-md flex-col text-center sm:max-w-lg">
           <AppLogo />
-          <h1 className="mt-4 text-center font-display text-4xl font-medium text-neutral-900 sm:text-5xl sm:leading-[1.15]">
-            Running
-            Playlist
+          <h1 className="mt-4 text-center font-display text-4xl font-medium text-neutral-900">
+            Running Playlist
           </h1>
-          <p className="mt-2 text-base text-neutral-500 sm:text-lg">
+          <p className="mt-2 text-base text-neutral-500">
             Find and share your favorite running playlists.
           </p>
         </div>
