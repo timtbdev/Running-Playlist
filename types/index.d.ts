@@ -1,4 +1,3 @@
-import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { IconType } from "react-icons";
 
 export type HeadType = {
@@ -111,4 +110,31 @@ export type ProjectSubNavType = {
   image?: string;
   href: string;
   icon?: IconType;
+};
+
+export type MusicType = {
+  title: string;
+  artist: string;
+  image: string;
+  genre: GenreType;
+  bpm: number;
+  user: UserType;
+  date: string;
+  urls: UrlType[];
+};
+
+export type GenreType = {
+  name: string;
+  icon: IconType;
+};
+
+export type UserType = {
+  name: string;
+  image: string;
+};
+
+export type UrlType = {
+  label: string;
+  url: string;
+  icon: IconType;
 };
