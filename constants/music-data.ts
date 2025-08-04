@@ -8,6 +8,8 @@ export const musicData: MusicType[] = [
     addedBy: "John Smith",
     bpm: 120,
     link: "https://www.spotify.com/track/1",
+    qrCode:
+      "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.spotify.com/track/1",
     rating: 5,
   },
   {
@@ -17,6 +19,8 @@ export const musicData: MusicType[] = [
     addedBy: "Sarah Johnson",
     bpm: 75,
     link: "https://www.spotify.com/track/2",
+    qrCode:
+      "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.spotify.com/track/2",
     rating: 4,
   },
   {
@@ -26,6 +30,8 @@ export const musicData: MusicType[] = [
     addedBy: "Mike Wilson",
     bpm: 63,
     link: "https://www.spotify.com/track/3",
+    qrCode:
+      "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.spotify.com/track/3",
     rating: 3,
   },
   {
@@ -35,6 +41,8 @@ export const musicData: MusicType[] = [
     addedBy: "Lisa Davis",
     bpm: 76,
     link: "https://www.spotify.com/track/4",
+    qrCode:
+      "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.spotify.com/track/4",
     rating: 2,
   },
   {
@@ -44,6 +52,8 @@ export const musicData: MusicType[] = [
     addedBy: "Tom Brown",
     bpm: 95,
     link: "https://www.spotify.com/track/5",
+    qrCode:
+      "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.spotify.com/track/5",
     rating: 1,
   },
   {
@@ -53,6 +63,8 @@ export const musicData: MusicType[] = [
     addedBy: "Emma Wilson",
     bpm: 73,
     link: "https://www.spotify.com/track/6",
+    qrCode:
+      "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.spotify.com/track/6",
     rating: 5,
   },
   {
@@ -62,6 +74,8 @@ export const musicData: MusicType[] = [
     addedBy: "David Lee",
     bpm: 79,
     link: "https://www.spotify.com/track/7",
+    qrCode:
+      "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.spotify.com/track/7",
     rating: 4,
   },
   {
@@ -71,6 +85,8 @@ export const musicData: MusicType[] = [
     addedBy: "Anna Garcia",
     bpm: 87,
     link: "https://www.spotify.com/track/8",
+    qrCode:
+      "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.spotify.com/track/8",
     rating: 4,
   },
   {
@@ -80,6 +96,8 @@ export const musicData: MusicType[] = [
     addedBy: "Chris Martin",
     bpm: 92,
     link: "https://www.spotify.com/track/9",
+    qrCode:
+      "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.spotify.com/track/9",
     rating: 5,
   },
   {
@@ -89,6 +107,8 @@ export const musicData: MusicType[] = [
     addedBy: "Kurt Cobain",
     bpm: 117,
     link: "https://www.spotify.com/track/10",
+    qrCode:
+      "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.spotify.com/track/10",
     rating: 5,
   },
 ];

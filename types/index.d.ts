@@ -119,5 +119,6 @@ export type MusicType = {
   addedBy: string;
   bpm: number;
   link: string;
+  qrCode: string;
   rating: number;
 };

@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import RunningManIcon from "@/icons/running-man-icon";
+import { CircleFadingPlusIcon as AddIcon } from "lucide-react";
 
 const AppLogo = () => (
   <div className="relative mx-auto flex size-16 items-center justify-center">
@@ -22,14 +23,15 @@ const Hero = () => {
         <div className="relative mx-auto flex max-w-md flex-col text-center sm:max-w-lg">
           <AppLogo />
           <h1 className="font-display mt-4 text-center text-4xl font-medium text-neutral-900">
-            Running Playlist
+            Battle-Tested
           </h1>
-          <p className="mt-2 text-base text-neutral-500">
-            Battle-Tested Beats for Runners
-          </p>
+          <p className="mt-2 text-2xl text-neutral-500">Beats for Runners</p>
         </div>
-        <div className="mx-auto mt-4 max-w-full text-center">
-          <Button>Add to Playlist</Button>
+        <div className="mx-auto mt-4 flex max-w-full flex-col items-center gap-2 text-center">
+          <Button className="bg-blue-500 text-white hover:bg-blue-600">
+            <AddIcon className="h-4 w-4" />
+            Add to Playlist
+          </Button>
         </div>
       </div>
     </div>
