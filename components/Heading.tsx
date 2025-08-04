@@ -1,5 +1,4 @@
-import { cn } from "@/lib/utils";
-import React, { FC, ReactNode } from "react";
+import { FC, ReactNode } from "react";
 
 interface HeadingProps {
   children: ReactNode;

@@ -113,28 +113,11 @@ export type ProjectSubNavType = {
 };
 
 export type MusicType = {
-  title: string;
+  id: string;
+  music: string;
   artist: string;
-  image: string;
-  genre: GenreType;
+  addedBy: string;
   bpm: number;
-  user: UserType;
-  date: string;
-  urls: UrlType[];
-};
-
-export type GenreType = {
-  name: string;
-  icon: IconType;
-};
-
-export type UserType = {
-  name: string;
-  image: string;
-};
-
-export type UrlType = {
-  label: string;
-  url: string;
-  icon: IconType;
+  link: string;
+  rating: number;
 };
