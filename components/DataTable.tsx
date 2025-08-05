@@ -16,6 +16,7 @@ import {
   ExternalLink,
   MusicIcon,
   QrCodeIcon,
+  Tag,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -23,6 +24,7 @@ import Link from "next/link";
 const TABLE_COLUMNS = [
   { key: "music", label: "Music", icon: MusicIcon },
   { key: "artist", label: "Artist", icon: ArtistIcon },
+  { key: "category", label: "Category", icon: Tag },
   { key: "bpm", label: "BPM", icon: BpmIcon },
   { key: "addedBy", label: "Added By", icon: null },
   { key: "rating", label: "Rating", icon: null },
@@ -51,15 +53,26 @@ function IconCell({
 }
 
 // Avatar cell component
-function AvatarCell({ src, name }: { src: string; name: string }) {
+function AvatarCell({
+  src,
+  firstName,
+  lastName,
+}: {
+  src: string;
+  firstName: string;
+  lastName: string;
+}) {
   return (
     <TableCell className="border-r">
       <div className="flex items-center gap-2">
         <Avatar className="size-6">
           <AvatarImage src={src} />
-          <AvatarFallback className="text-sm">{name.charAt(0)}</AvatarFallback>
+          <AvatarFallback className="text-sm">
+            {firstName.charAt(0)}
+            {lastName.charAt(0)}
+          </AvatarFallback>
         </Avatar>
-        {name}
+        <span className="text-sm font-medium text-gray-600">{firstName}</span>
       </div>
     </TableCell>
   );
@@ -115,6 +128,38 @@ function QRCodeCell({ qrCodeUrl }: { qrCodeUrl: string }) {
   );
 }
 
+// Category cell component with color-coded badges
+function CategoryCell({ category }: { category: string }) {
+  const getCategoryColor = (cat: string) => {
+    switch (cat) {
+      case "Easy":
+        return "bg-green-100 text-green-800 border-green-200";
+      case "Tempo":
+        return "bg-blue-100 text-blue-800 border-blue-200";
+      case "Sprint":
+        return "bg-yellow-100 text-yellow-800 border-yellow-200";
+      case "Hard":
+        return "bg-red-100 text-red-800 border-red-200";
+      default:
+        return "bg-gray-100 text-gray-800 border-gray-200";
+    }
+  };
+
+  return (
+    <TableCell className="border-r">
+      <div className="flex items-center gap-2">
+        <span
+          className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium ${getCategoryColor(
+            category,
+          )}`}
+        >
+          {category}
+        </span>
+      </div>
+    </TableCell>
+  );
+}
+
 export default function DataTable({ data }: { data: MusicType[] }) {
   return (
     <Table>
@@ -137,8 +182,13 @@ export default function DataTable({ data }: { data: MusicType[] }) {
               {item.music}
             </IconCell>
             <IconCell icon={ArtistIcon}>{item.artist}</IconCell>
+            <CategoryCell category={item.category} />
             <IconCell icon={BpmIcon}>{item.bpm}</IconCell>
-            <AvatarCell src={item.addedBy} name={item.addedBy} />
+            <AvatarCell
+              src={item.addedBy.avatar}
+              firstName={item.addedBy.firstName}
+              lastName={item.addedBy.lastName}
+            />
             <RatingCell rating={item.rating} />
             <QRCodeCell qrCodeUrl={item.qrCode} />
             <LinkCell href={item.link} />
