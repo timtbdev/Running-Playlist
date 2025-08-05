@@ -38,6 +38,37 @@ const TABLE_COLUMNS = [
   { key: "link", label: "Link", icon: null },
 ] as const;
 
+// Category configuration
+const CATEGORY_CONFIG = {
+  Easy: {
+    styles: "bg-green-100 border-green-300 text-green-800",
+    icon: EasyIcon,
+  },
+  Tempo: {
+    styles: "bg-blue-100 border-blue-300 text-blue-800",
+    icon: TempoIcon,
+  },
+  Sprint: {
+    styles: "bg-orange-100 border-orange-300 text-orange-800",
+    icon: SprintIcon,
+  },
+  Hard: {
+    styles: "bg-red-100 border-red-300 text-red-800",
+    icon: HardIcon,
+  },
+} as const;
+
+// Constants
+const TEXT_TRUNCATE_LENGTH = 20;
+
+// Utility functions
+const truncateText = (
+  text: string,
+  maxLength: number = TEXT_TRUNCATE_LENGTH,
+) => {
+  return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
+};
+
 // Standard icon + text cell component
 function IconCell({
   icon: Icon,
@@ -126,31 +157,20 @@ function QRCodeCell({ qrCodeUrl }: { qrCodeUrl: string }) {
 }
 
 // Category cell component with color-coded badges
-function CategoryCell({ category }: { category: string }) {
-  const getCategoryStyles = (category: string) => {
-    switch (category) {
-      case "Easy":
-        return "bg-green-100 border-green-300 text-green-800";
-      case "Tempo":
-        return "bg-blue-100 border-blue-300 text-blue-800";
-      case "Sprint":
-        return "bg-orange-100 border-orange-300 text-orange-800";
-      case "Hard":
-        return "bg-red-100 border-red-300 text-red-800";
-      default:
-        return "bg-gray-100 border-gray-300 text-gray-800";
-    }
-  };
+function CategoryCell({
+  category,
+}: {
+  category: keyof typeof CATEGORY_CONFIG;
+}) {
+  const config = CATEGORY_CONFIG[category];
+  const Icon = config.icon;
 
   return (
     <TableCell className="border-r">
       <div
-        className={`flex items-center gap-1 rounded-md border px-2 py-1 ${getCategoryStyles(category)}`}
+        className={`flex items-center gap-1 rounded-md border px-2 py-1 ${config.styles}`}
       >
-        {category === "Easy" ? <EasyIcon className="h-4 w-4" /> : null}
-        {category === "Tempo" ? <TempoIcon className="h-4 w-4" /> : null}
-        {category === "Sprint" ? <SprintIcon className="h-4 w-4" /> : null}
-        {category === "Hard" ? <HardIcon className="h-4 w-4" /> : null}
+        <Icon className="h-4 w-4" />
         <span className="text-sm font-medium">{category}</span>
       </div>
     </TableCell>
@@ -176,14 +196,10 @@ export default function DataTable({ data }: { data: MusicType[] }) {
         {data.map((item) => (
           <TableRow key={item.id}>
             <IconCell icon={MusicIcon} className="font-medium">
-              {item.music.length > 20
-                ? `${item.music.substring(0, 20)}...`
-                : item.music}
+              {truncateText(item.music)}
             </IconCell>
             <IconCell icon={ArtistIcon} className="font-medium">
-              {item.artist.length > 20
-                ? `${item.artist.substring(0, 20)}...`
-                : item.artist}
+              {truncateText(item.artist)}
             </IconCell>
             <CategoryCell category={item.category} />
             <IconCell icon={BpmIcon}>{item.bpm}</IconCell>
