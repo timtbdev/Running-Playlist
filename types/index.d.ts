@@ -1,3 +1,31 @@
+export type HeadType = {
+  page: string;
+  title: string;
+  slug: string;
+  description: string;
+};
+
+export type AuthorType = {
+  name: string;
+  twitterUrl: string;
+  twitterAddress: string;
+  email: string;
+};
+
+export type SocialType = {
+  href: string;
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+};
+
+export type NavigationLink = {
+  href: string;
+  label: string;
+  description?: string;
+  icon?: React.ComponentType<{ className?: string }>;
+  subNavigationLinks?: NavigationLink[];
+};
+
 export type MusicType = {
   id: string;
   music: string;

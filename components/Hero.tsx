@@ -1,19 +1,43 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { CATEGORY_CONFIG } from "@/constants/categories";
 import RunningManIcon from "@/icons/running-man-icon";
-import { CircleFadingPlusIcon as AddIcon } from "lucide-react";
+import RunningWomanIcon from "@/icons/running-woman-icon";
+import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
 
-const AppLogo = () => (
-  <div className="relative mx-auto flex size-16 items-center justify-center">
-    <div className="absolute inset-x-0 top-1/2 h-[140%] -translate-y-1/2 border-x border-neutral-200 [mask-image:linear-gradient(transparent,black_20%,black_80%,transparent)]" />
-    <div className="absolute inset-y-0 left-1/2 w-[140%] -translate-x-1/2 border-y border-neutral-200 [mask-image:linear-gradient(90deg,transparent,black_20%,black_80%,transparent)]" />
-    <div className="absolute inset-0 drop-shadow-sm">
-      <div className="absolute inset-0 rounded-xl border border-neutral-300 bg-white [mask-image:linear-gradient(#0007,black)]" />
+const AppLogo = () => {
+  const [currentIcon, setCurrentIcon] = useState<"man" | "woman">("man");
+
+  useEffect(() => {
+    // Randomly select an icon on component mount
+    const randomIcon = Math.random() < 0.5 ? "man" : "woman";
+    setCurrentIcon(randomIcon);
+  }, []);
+
+  return (
+    <div className="relative mx-auto flex size-16 items-center justify-center">
+      <div className="absolute inset-x-0 top-1/2 h-[140%] -translate-y-1/2 border-x border-neutral-200 [mask-image:linear-gradient(transparent,black_20%,black_80%,transparent)]" />
+      <div className="absolute inset-y-0 left-1/2 w-[140%] -translate-x-1/2 border-y border-neutral-200 [mask-image:linear-gradient(90deg,transparent,black_20%,black_80%,transparent)]" />
+      <div className="absolute inset-0 drop-shadow-sm">
+        <div className="absolute inset-0 rounded-xl border border-neutral-300 bg-white [mask-image:linear-gradient(#0007,black)]" />
+      </div>
+      {currentIcon === "man" ? (
+        <RunningManIcon className="relative size-18" />
+      ) : (
+        <RunningWomanIcon className="relative size-18" />
+      )}
     </div>
-    <RunningManIcon className="relative size-14" />
-  </div>
-);
+  );
+};
+
+const categories = Object.entries(CATEGORY_CONFIG).map(([name, config]) => ({
+  name,
+  description: config.description,
+  styles: config.styles,
+  icon: config.icon,
+}));
 
 const Hero = () => {
   return (
@@ -25,13 +49,29 @@ const Hero = () => {
           <h1 className="font-display mt-4 text-center text-4xl font-medium text-neutral-900">
             Battle-Tested
           </h1>
-          <p className="mt-2 text-2xl text-neutral-500">Beats for Runners</p>
+          <p className="mt-2 text-2xl text-gray-800">Beats for Runners</p>
         </div>
-        <div className="mx-auto mt-4 flex max-w-full flex-col items-center gap-2 text-center">
-          <Button className="bg-blue-500 text-white hover:bg-blue-600">
-            <AddIcon className="h-4 w-4" />
-            Add to Playlist
-          </Button>
+
+        {/* Categories Section */}
+        <div className="mx-auto mt-8 max-w-4xl">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {categories.map((category) => {
+              const Icon = category.icon;
+              return (
+                <Button
+                  key={category.name}
+                  variant="outline"
+                  className={cn(
+                    "flex items-center gap-2 rounded-md border p-[2px] text-center",
+                    category.styles,
+                  )}
+                >
+                  <Icon className="size-5" />
+                  <div className="text-lg font-semibold">{category.name}</div>
+                </Button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

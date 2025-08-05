@@ -8,20 +8,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { CATEGORY_CONFIG } from "@/constants/categories";
 import { MusicType } from "@/types";
 import {
   ArrowDown,
   ArrowUp,
   CircleUser as ArtistIcon,
   ActivityIcon as BpmIcon,
-  SnailIcon as EasyIcon,
-  ExternalLink,
-  RocketIcon as HardIcon,
   MusicIcon,
   QrCodeIcon,
-  RabbitIcon as SprintIcon,
-  Tag,
-  GaugeIcon as TempoIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { FaSpotify } from "react-icons/fa";
@@ -30,33 +25,13 @@ import { FaSpotify } from "react-icons/fa";
 const TABLE_COLUMNS = [
   { key: "music", label: "Music", icon: MusicIcon },
   { key: "artist", label: "Artist", icon: ArtistIcon },
-  { key: "category", label: "Category", icon: Tag },
+  { key: "category", label: "Category", icon: null },
   { key: "bpm", label: "BPM", icon: BpmIcon },
   { key: "rating", label: "Rating", icon: null },
   { key: "addedBy", label: "Added By", icon: null },
   { key: "qrCode", label: "QR", icon: QrCodeIcon },
   { key: "link", label: "Link", icon: null },
 ] as const;
-
-// Category configuration
-const CATEGORY_CONFIG = {
-  Easy: {
-    styles: "bg-green-100 border-green-300 text-green-800",
-    icon: EasyIcon,
-  },
-  Tempo: {
-    styles: "bg-blue-100 border-blue-300 text-blue-800",
-    icon: TempoIcon,
-  },
-  Sprint: {
-    styles: "bg-orange-100 border-orange-300 text-orange-800",
-    icon: SprintIcon,
-  },
-  Hard: {
-    styles: "bg-red-100 border-red-300 text-red-800",
-    icon: HardIcon,
-  },
-} as const;
 
 // Constants
 const TEXT_TRUNCATE_LENGTH = 20;
