@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -13,12 +14,17 @@ import {
   ArrowUp,
   CircleUser as ArtistIcon,
   ActivityIcon as BpmIcon,
+  SnailIcon as EasyIcon,
   ExternalLink,
+  RocketIcon as HardIcon,
   MusicIcon,
   QrCodeIcon,
+  RabbitIcon as SprintIcon,
   Tag,
+  GaugeIcon as TempoIcon,
 } from "lucide-react";
 import Link from "next/link";
+import { FaSpotify } from "react-icons/fa";
 
 // Table column configuration
 const TABLE_COLUMNS = [
@@ -26,8 +32,8 @@ const TABLE_COLUMNS = [
   { key: "artist", label: "Artist", icon: ArtistIcon },
   { key: "category", label: "Category", icon: Tag },
   { key: "bpm", label: "BPM", icon: BpmIcon },
-  { key: "addedBy", label: "Added By", icon: null },
   { key: "rating", label: "Rating", icon: null },
+  { key: "addedBy", label: "Added By", icon: null },
   { key: "qrCode", label: "QR", icon: QrCodeIcon },
   { key: "link", label: "Link", icon: null },
 ] as const;
@@ -99,15 +105,11 @@ function RatingCell({ rating }: { rating: number }) {
 function LinkCell({ href }: { href: string }) {
   return (
     <TableCell>
-      <Link
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-1 text-blue-500 hover:text-blue-600 hover:underline"
-      >
-        Listen
-        <ExternalLink className="h-3 w-3" />
-      </Link>
+      <Button asChild variant="outline" className="p-2">
+        <Link href={href} target="_blank" rel="noopener noreferrer">
+          Listen <FaSpotify className="h-4 w-4 text-green-500" />
+        </Link>
+      </Button>
     </TableCell>
   );
 }
@@ -116,45 +118,40 @@ function LinkCell({ href }: { href: string }) {
 function QRCodeCell({ qrCodeUrl }: { qrCodeUrl: string }) {
   return (
     <TableCell className="border-r">
-      <Link
-        href={qrCodeUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-1 text-gray-500 hover:text-gray-900"
-      >
-        <QrCodeIcon className="h-4 w-4" />
-      </Link>
+      <Button variant="outline" size="icon" className="size-8">
+        <QrCodeIcon className="h-4 w-4 text-gray-800" />
+      </Button>
     </TableCell>
   );
 }
 
 // Category cell component with color-coded badges
 function CategoryCell({ category }: { category: string }) {
-  const getCategoryColor = (cat: string) => {
-    switch (cat) {
+  const getCategoryStyles = (category: string) => {
+    switch (category) {
       case "Easy":
-        return "bg-green-100 text-green-800 border-green-200";
+        return "bg-green-100 border-green-300 text-green-800";
       case "Tempo":
-        return "bg-blue-100 text-blue-800 border-blue-200";
+        return "bg-blue-100 border-blue-300 text-blue-800";
       case "Sprint":
-        return "bg-yellow-100 text-yellow-800 border-yellow-200";
+        return "bg-orange-100 border-orange-300 text-orange-800";
       case "Hard":
-        return "bg-red-100 text-red-800 border-red-200";
+        return "bg-red-100 border-red-300 text-red-800";
       default:
-        return "bg-gray-100 text-gray-800 border-gray-200";
+        return "bg-gray-100 border-gray-300 text-gray-800";
     }
   };
 
   return (
     <TableCell className="border-r">
-      <div className="flex items-center gap-2">
-        <span
-          className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium ${getCategoryColor(
-            category,
-          )}`}
-        >
-          {category}
-        </span>
+      <div
+        className={`flex items-center gap-1 rounded-md border px-2 py-1 ${getCategoryStyles(category)}`}
+      >
+        {category === "Easy" ? <EasyIcon className="h-4 w-4" /> : null}
+        {category === "Tempo" ? <TempoIcon className="h-4 w-4" /> : null}
+        {category === "Sprint" ? <SprintIcon className="h-4 w-4" /> : null}
+        {category === "Hard" ? <HardIcon className="h-4 w-4" /> : null}
+        <span className="text-sm font-medium">{category}</span>
       </div>
     </TableCell>
   );
@@ -179,17 +176,23 @@ export default function DataTable({ data }: { data: MusicType[] }) {
         {data.map((item) => (
           <TableRow key={item.id}>
             <IconCell icon={MusicIcon} className="font-medium">
-              {item.music}
+              {item.music.length > 20
+                ? `${item.music.substring(0, 20)}...`
+                : item.music}
             </IconCell>
-            <IconCell icon={ArtistIcon}>{item.artist}</IconCell>
+            <IconCell icon={ArtistIcon} className="font-medium">
+              {item.artist.length > 20
+                ? `${item.artist.substring(0, 20)}...`
+                : item.artist}
+            </IconCell>
             <CategoryCell category={item.category} />
             <IconCell icon={BpmIcon}>{item.bpm}</IconCell>
+            <RatingCell rating={item.rating} />
             <AvatarCell
               src={item.addedBy.avatar}
               firstName={item.addedBy.firstName}
               lastName={item.addedBy.lastName}
             />
-            <RatingCell rating={item.rating} />
             <QRCodeCell qrCodeUrl={item.qrCode} />
             <LinkCell href={item.link} />
           </TableRow>
