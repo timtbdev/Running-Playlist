@@ -1,11 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { CATEGORY_CONFIG } from "@/constants/categories";
 import RunningManIcon from "@/icons/running-man-icon";
 import RunningWomanIcon from "@/icons/running-woman-icon";
-import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import Categories from "./Categories";
 
 const AppLogo = () => {
   const [currentIcon, setCurrentIcon] = useState<"man" | "woman">("man");
@@ -32,13 +30,6 @@ const AppLogo = () => {
   );
 };
 
-const categories = Object.entries(CATEGORY_CONFIG).map(([name, config]) => ({
-  name,
-  description: config.description,
-  styles: config.styles,
-  icon: config.icon,
-}));
-
 const Hero = () => {
   return (
     <div className="grid-section relative overflow-clip">
@@ -53,25 +44,8 @@ const Hero = () => {
         </div>
 
         {/* Categories Section */}
-        <div className="mx-auto mt-8 max-w-4xl">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {categories.map((category) => {
-              const Icon = category.icon;
-              return (
-                <Button
-                  key={category.name}
-                  variant="outline"
-                  className={cn(
-                    "flex items-center gap-2 rounded-md border p-[2px] text-center",
-                    category.styles,
-                  )}
-                >
-                  <Icon className="size-5" />
-                  <div className="text-lg font-semibold">{category.name}</div>
-                </Button>
-              );
-            })}
-          </div>
+        <div className="mx-auto mt-8 w-full px-4">
+          <Categories />
         </div>
       </div>
     </div>

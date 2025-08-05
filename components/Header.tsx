@@ -51,9 +51,9 @@ export default function Header({ className }: HeaderProps) {
 
           {/* Auth Buttons */}
           <div className="flex gap-2">
-            <Button className="bg-blue-500 text-white hover:bg-blue-600">
+            <Button className="bg-blue-600 text-white hover:bg-blue-500">
               <PlusIcon className="h-4 w-4" />
-              Add to Playlist
+              <span className="text-md font-semibold">Add to Playlist</span>
             </Button>
           </div>
         </div>

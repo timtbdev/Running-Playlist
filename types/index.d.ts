@@ -65,3 +65,15 @@ export type UserType = {
   avatar: string;
   email: string;
 };
+
+export type CategoryType = {
+  name: string;
+  description: string;
+  backgroundLight: string;
+  backgroundDark: string;
+  border: string;
+  text: string;
+  icon: React.ComponentType<{ className?: string }>;
+  slug: string;
+  groupHover: string;
+};

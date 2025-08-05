@@ -8,7 +8,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { CATEGORY_CONFIG } from "@/constants/categories";
+import { categoryData } from "@/constants/category-data";
+import { cn } from "@/lib/utils";
 import { MusicType } from "@/types";
 import {
   ArrowDown,
@@ -96,8 +97,12 @@ function RatingCell({ rating }: { rating: number }) {
     <TableCell className="border-r">
       <div className="flex items-center gap-2">
         <div className="flex items-center gap-1">
-          <ArrowUp className="h-4 w-4 cursor-pointer text-green-600 transition-all duration-200 ease-in-out hover:scale-110" />
-          <ArrowDown className="h-4 w-4 cursor-pointer text-red-600 transition-all duration-200 ease-in-out hover:scale-110" />
+          <Button variant="outline" size="icon">
+            <ArrowUp className="h-4 w-4 cursor-pointer text-green-600 transition-all duration-200 ease-in-out hover:scale-110" />
+          </Button>
+          <Button variant="outline" size="icon">
+            <ArrowDown className="h-4 w-4 cursor-pointer text-red-600 transition-all duration-200 ease-in-out hover:scale-110" />
+          </Button>
         </div>
         <span className="text-sm font-medium text-gray-600">
           {rating > 0 ? `+${rating}` : rating}
@@ -135,15 +140,22 @@ function QRCodeCell({ qrCodeUrl }: { qrCodeUrl: string }) {
 function CategoryCell({
   category,
 }: {
-  category: keyof typeof CATEGORY_CONFIG;
+  category: "Easy" | "Tempo" | "Sprint" | "Hard";
 }) {
-  const config = CATEGORY_CONFIG[category];
+  const config = categoryData.find((cat) => cat.name === category);
+  if (!config) return <TableCell className="border-r">Unknown</TableCell>;
+
   const Icon = config.icon;
 
   return (
     <TableCell className="border-r">
       <div
-        className={`flex items-center gap-1 rounded-md border px-2 py-1 ${config.styles}`}
+        className={cn(
+          "flex items-center gap-1 rounded-md border px-2 py-1",
+          config.backgroundLight,
+          config.border,
+          config.text,
+        )}
       >
         <Icon className="h-4 w-4" />
         <span className="text-sm font-medium">{category}</span>
