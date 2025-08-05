@@ -7,5 +7,6 @@ export const users: UserType[] = [
     lastName: "Baz",
     avatar: "/images/avatars/tim-baz.jpg",
     email: "timtb.dev@gmail.com",
+    bio: "Road runner",
   },
 ];
