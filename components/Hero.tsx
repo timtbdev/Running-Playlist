@@ -38,7 +38,7 @@ const Hero = () => {
         <div className="relative mx-auto flex max-w-md flex-col text-center sm:max-w-lg">
           <AppLogo />
           <h1 className="font-display mt-4 text-center text-4xl font-medium text-neutral-900">
-            Battle-Tested
+            Battle Tested
           </h1>
           <p className="mt-2 text-2xl text-gray-800">Beats for Runners</p>
         </div>
