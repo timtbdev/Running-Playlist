@@ -29,22 +29,25 @@ import {
   ArrowUp,
   CircleUser as ArtistIcon,
   ActivityIcon as BpmIcon,
+  Minus,
   MusicIcon,
+  Plus,
   QrCodeIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { FaSpotify } from "react-icons/fa";
+import { Spotify } from "react-spotify-embed";
 
 // Constants
 const TABLE_COLUMNS = [
   { key: "music", label: "Music", icon: MusicIcon },
   { key: "artist", label: "Artist", icon: ArtistIcon },
-  { key: "category", label: "Category" },
+  { key: "category", label: "Category", icon: null },
   { key: "bpm", label: "BPM", icon: BpmIcon },
-  { key: "rating", label: "Rating" },
-  { key: "addedBy", label: "Added By" },
+  { key: "rating", label: "Rating", icon: null },
+  { key: "addedBy", label: "Added By", icon: null },
   { key: "qrCode", label: "QR", icon: QrCodeIcon },
-  { key: "link", label: "Link" },
+  { key: "link", label: "Link", icon: null },
 ] as const;
 
 const TEXT_TRUNCATE_LENGTH = 20;
@@ -52,14 +55,14 @@ const TEXT_TRUNCATE_LENGTH = 20;
 // Utility functions
 const truncateText = (
   text: string,
-  maxLength = TEXT_TRUNCATE_LENGTH,
+  maxLength: number = TEXT_TRUNCATE_LENGTH,
 ): string => {
   return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
 };
 
-// Component types
+// Component interfaces
 interface IconCellProps {
-  icon?: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<{ className?: string }>;
   children: React.ReactNode;
   className?: string;
 }
@@ -87,9 +90,9 @@ interface CategoryCellProps {
 // Standard icon + text cell component
 function IconCell({ icon: Icon, children, className = "" }: IconCellProps) {
   return (
-    <TableCell className={cn("border-r", className)}>
+    <TableCell className={`border-r ${className}`}>
       <div className="flex items-center gap-2">
-        {Icon && <Icon className="h-4 w-4" />}
+        <Icon className="h-4 w-4" />
         {children}
       </div>
     </TableCell>
@@ -98,8 +101,6 @@ function IconCell({ icon: Icon, children, className = "" }: IconCellProps) {
 
 // Avatar cell component
 function AvatarCell({ user }: AvatarCellProps) {
-  const initials = `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`;
-
   return (
     <TableCell className="border-r">
       <HoverCard>
@@ -107,7 +108,10 @@ function AvatarCell({ user }: AvatarCellProps) {
           <div className="flex cursor-pointer items-center gap-2">
             <Avatar className="size-6">
               <AvatarImage src={user.avatar} />
-              <AvatarFallback className="text-sm">{initials}</AvatarFallback>
+              <AvatarFallback className="text-sm">
+                {user.firstName.charAt(0)}
+                {user.lastName.charAt(0)}
+              </AvatarFallback>
             </Avatar>
             <span className="text-sm font-medium text-gray-600 hover:underline">
               {user.firstName}
@@ -118,7 +122,10 @@ function AvatarCell({ user }: AvatarCellProps) {
           <div className="flex gap-2">
             <Avatar>
               <AvatarImage src={user.avatar} />
-              <AvatarFallback>{initials}</AvatarFallback>
+              <AvatarFallback>
+                {user.firstName.charAt(0)}
+                {user.lastName.charAt(0)}
+              </AvatarFallback>
             </Avatar>
             <div>
               <h4 className="text-sm font-semibold">
@@ -163,19 +170,27 @@ function RatingCell({ rating }: RatingCellProps) {
 function LinkCell({ href }: LinkCellProps) {
   return (
     <TableCell>
-      <Button asChild variant="outline" className="p-2">
-        <Link href={href} target="_blank" rel="noopener noreferrer">
-          Listen <FaSpotify className="h-4 w-4 text-green-500" />
-        </Link>
-      </Button>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button variant="outline" className="p-2">
+            Listen <FaSpotify className="h-4 w-4 text-green-500" />
+          </Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Listen on Spotify</DialogTitle>
+          </DialogHeader>
+          <div className="flex justify-center p-4">
+            <Spotify link={href} style={{ borderRadius: "10px" }} />
+          </div>
+        </DialogContent>
+      </Dialog>
     </TableCell>
   );
 }
 
 // QR code cell component
 function QRCodeCell({ url }: QRCodeCellProps) {
-  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
-
   return (
     <TableCell className="border-r">
       <Dialog>
@@ -192,7 +207,11 @@ function QRCodeCell({ url }: QRCodeCellProps) {
             </DialogDescription>
           </DialogHeader>
           <div className="flex justify-center p-4">
-            <img src={qrCodeUrl} alt="QR Code" className="rounded-lg border" />
+            <img
+              src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`}
+              alt="QR Code"
+              className="rounded-lg border"
+            />
           </div>
         </DialogContent>
       </Dialog>

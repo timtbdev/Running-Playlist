@@ -38,7 +38,7 @@ const Categories: React.FC = () => {
               )}
             >
               <div className="flex-1 truncate px-4 py-2 text-sm">
-                <span className={cn("font-medium text-gray-900")}>
+                <span className={cn("font-semibold text-gray-900")}>
                   {category.name}
                 </span>
                 <p className="text-gray-800">{category.description}</p>
