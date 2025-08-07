@@ -1,13 +1,13 @@
-export function truncateTitle(title: string, maxLength: number = 60): string {
+export function truncateTitle(title: string, maxLength = 60): string {
   return title.length > maxLength
-    ? title.slice(0, maxLength - 3) + "..."
+    ? title.slice(0, maxLength - 3) + '...'
     : title;
 }
 export function truncateDescription(
   description: string,
-  maxLength: number = 160,
+  maxLength = 160
 ): string {
   return description.length > maxLength
-    ? description.slice(0, maxLength - 3) + "..."
+    ? description.slice(0, maxLength - 3) + '...'
     : description;
 }

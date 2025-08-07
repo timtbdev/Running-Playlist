@@ -32,8 +32,7 @@ export type MusicType = {
   artist: string;
   addedBy: UserType;
   bpm: number;
-  link: string;
-  qrCode: string;
+  link: LinkType;
   rating: number;
   category: "Easy" | "Tempo" | "Sprint" | "Hard";
 };
@@ -57,4 +56,25 @@ export type CategoryType = {
   icon: React.ComponentType<{ className?: string }>;
   slug: string;
   groupHover: string;
+};
+
+export type LinkType = {
+  spotify?: string | null;
+  appleMusic?: string | null;
+  soundcloud?: string | null;
+  youtube?: string | null;
+  pandora?: string | null;
+};
+
+export type TableColumnType = {
+  key: keyof MusicType;
+  label: string;
+  icon: React.ComponentType<{ className?: string }> | null;
+};
+
+export type StreamingPlatform = {
+  id: string;
+  name: string;
+  icon: React.ComponentType<{ className?: string }>;
+  color: string;
 };

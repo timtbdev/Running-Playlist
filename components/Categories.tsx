@@ -1,23 +1,20 @@
-import { categoryData } from "@/constants/category-data";
+import CATEGORIES from "@/constants/categories";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import React from "react";
+import type React from "react";
 
 const Categories: React.FC = () => {
   return (
     <section aria-labelledby="categories-heading">
-      <ul
-        role="list"
-        className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4"
-      >
-        {categoryData.map((category) => (
+      <ul className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+        {CATEGORIES.map((category) => (
           <Link
-            key={category.name}
-            href={`/categories/${category.slug}`}
             className={cn(
               "group col-span-1 flex rounded-md border",
               category.border,
             )}
+            href={`/categories/${category.slug}`}
+            key={category.name}
           >
             <div
               className={cn(
@@ -27,8 +24,8 @@ const Categories: React.FC = () => {
               )}
             >
               <category.icon
-                className={cn("size-6", category.text)}
                 aria-hidden="true"
+                className={cn("size-6", category.text)}
               />
             </div>
             <div

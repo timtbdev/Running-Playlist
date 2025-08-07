@@ -1,25 +1,21 @@
-import { NavigationLink } from "@/types";
-import {
-    UserIcon as AboutMeIcon,
-    HomeIcon,
-    MailIcon
-} from "lucide-react";
+import { UserIcon as AboutMeIcon, HomeIcon, MailIcon } from 'lucide-react';
+import type { NavigationLink } from '@/types';
 
 const navigationLinks: NavigationLink[] = [
   {
     icon: HomeIcon,
-    href: "/",
-    label: "Home",
+    href: '/',
+    label: 'Home',
   },
   {
     icon: AboutMeIcon,
-    href: "/about",
-    label: "About",
+    href: '/about',
+    label: 'About',
   },
   {
     icon: MailIcon,
-    href: "/contact",
-    label: "Contact",
+    href: '/contact',
+    label: 'Contact',
   },
 ];
 

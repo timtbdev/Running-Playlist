@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -19,14 +19,13 @@ export default function Header({ className }: HeaderProps) {
   return (
     <header
       className={cn("bg-background sticky top-0 z-50 border-b", className)}
-      role="navigation"
     >
       <div className="mx-auto max-w-5xl px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
+          <Link className="flex items-center gap-2" href="/">
             <Avatar className="h-6 w-6">
-              <AvatarImage src="/images/logo.png" alt="Logo" />
+              <AvatarImage alt="Logo" src="/images/logo.png" />
             </Avatar>
             <span className="font-semibold">Playlist.fan</span>
           </Link>
@@ -38,8 +37,8 @@ export default function Header({ className }: HeaderProps) {
                 <NavigationMenuItem key={item.href}>
                   <NavigationMenuLink asChild>
                     <Link
-                      href={item.href}
                       className="hover:text-accent-foreground font-medium"
+                      href={item.href}
                     >
                       {item.label}
                     </Link>

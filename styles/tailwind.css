@@ -120,6 +120,6 @@
     @apply bg-background text-foreground;
   }
   .heading-grid-border {
-    color: rgb(229 229 229/0.6);
+    color: rgb(229 229 229 / 0.6);
   }
 }
