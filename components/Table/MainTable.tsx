@@ -1,21 +1,21 @@
-import { ActivityIcon as BpmIcon } from 'lucide-react';
 import {
   Table,
   TableBody,
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import TABLE_COLUMNS from '@/constants/table-columns';
-import { truncateText } from '@/lib/utils';
-import type { MusicType } from '@/types';
-import AvatarCell from './columns/AddedBy';
-import ArtistCell from './columns/Artist';
-import BPMCell from './columns/BPM';
-import CategoryCell from './columns/Category';
-import ListenCell from './columns/Listen';
-import MusicCell from './columns/Music';
-import RatingCell from './columns/Rating';
+} from "@/components/ui/table";
+import TABLE_COLUMNS from "@/constants/table-columns";
+import { truncateText } from "@/lib/utils";
+import type { MusicType } from "@/types";
+import { ActivityIcon as BpmIcon } from "lucide-react";
+import AvatarCell from "./columns/AddedBy";
+import ArtistCell from "./columns/Artist";
+import BPMCell from "./columns/BPM";
+import CategoryCell from "./columns/Category";
+import ListenCell from "./columns/listen/Listen";
+import MusicCell from "./columns/Music";
+import RatingCell from "./columns/Rating";
 
 // Main DataTable component
 interface MainTableProps {
@@ -29,7 +29,7 @@ export default function MainTable({ data }: MainTableProps) {
         <TableRow>
           {TABLE_COLUMNS.map((column) => (
             <TableHead
-              className={column.key !== 'link' ? 'border-r' : ''}
+              className={column.key !== "link" ? "border-r" : ""}
               key={column.key}
             >
               {column.label}

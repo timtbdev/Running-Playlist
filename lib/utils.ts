@@ -1,6 +1,6 @@
-import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-import STREAMING_PLATFORMS from '@/constants/streaming-platforms';
+import { LinkType } from "@/types";
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 /**
  * Merges Tailwind class names, resolving any conflicts.
@@ -14,14 +14,14 @@ export function cn(...inputs: ClassValue[]): string {
 export function getBaseUrl(slug?: string): string {
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL ||
-    (process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3000'
-      : 'https://playlist.fan');
+    (process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://playlist.fan");
 
   if (!slug) return baseUrl;
 
   // Ensure the slug starts with a forward slash
-  const normalizedSlug = slug.startsWith('/') ? slug : `/${slug}`;
+  const normalizedSlug = slug.startsWith("/") ? slug : `/${slug}`;
   return `${baseUrl}${normalizedSlug}`;
 }
 
@@ -41,8 +41,8 @@ export const shimmer = (w: number, h: number) => `
 </svg>`;
 
 export const toBase64 = (str: string) =>
-  typeof window === 'undefined'
-    ? Buffer.from(str).toString('base64')
+  typeof window === "undefined"
+    ? Buffer.from(str).toString("base64")
     : window.btoa(str);
 
 // Reading Time
@@ -89,4 +89,21 @@ export function getYoutubeId(url: string | null | undefined): string | null {
   }
 
   return null;
+}
+
+// Helper function to get platform URL
+export function getPlatformUrl(
+  href: LinkType,
+  platformId: string,
+): string | null {
+  const urlMap: Record<string, keyof LinkType> = {
+    spotify: "spotify",
+    "apple-music": "appleMusic",
+    soundcloud: "soundcloud",
+    youtube: "youtube",
+    pandora: "pandora",
+  };
+
+  const key = urlMap[platformId];
+  return key ? href[key] || null : null;
 }
