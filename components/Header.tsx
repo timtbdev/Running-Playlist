@@ -37,7 +37,7 @@ export default function Header({ className }: HeaderProps) {
                 <NavigationMenuItem key={item.href}>
                   <NavigationMenuLink asChild>
                     <Link
-                      className="hover:text-accent-foreground font-medium"
+                      className="hover:text-accent-foreground font-medium transition-colors"
                       href={item.href}
                     >
                       {item.label}
@@ -48,11 +48,11 @@ export default function Header({ className }: HeaderProps) {
             </NavigationMenuList>
           </NavigationMenu>
 
-          {/* Auth Buttons */}
-          <div className="flex gap-2">
-            <Button className="bg-blue-600 text-white hover:bg-blue-500">
-              <PlusIcon className="h-4 w-4" />
-              <span className="text-md font-semibold">Add to Playlist</span>
+          {/* Action Button */}
+          <div className="flex gap-1">
+            <Button className="bg-sky-500 font-semibold text-white transition-colors hover:bg-sky-500 hover:ring-2 hover:ring-sky-300 hover:ring-offset-2 hover:ring-offset-white">
+              <PlusIcon className="size-4" />
+              Add to playlist
             </Button>
           </div>
         </div>

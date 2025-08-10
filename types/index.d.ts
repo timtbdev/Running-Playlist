@@ -12,12 +12,6 @@ export type AuthorType = {
   email: string;
 };
 
-export type SocialType = {
-  href: string;
-  icon: React.ComponentType<{ className?: string }>;
-  label: string;
-};
-
 export type NavigationLink = {
   href: string;
   label: string;

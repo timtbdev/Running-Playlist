@@ -1,19 +1,21 @@
+import type { TableColumnType } from "@/types";
 import {
+  UserIcon as AddedByIcon,
   CircleUser as ArtistIcon,
-  ActivityIcon as BpmIcon,
+  ListFilterIcon as CategoryIcon,
   HeadphonesIcon,
+  LinkIcon,
   MusicIcon,
-} from 'lucide-react';
-import type { TableColumnType } from '@/types';
+  StarIcon as RatingIcon,
+} from "lucide-react";
 
 const TABLE_COLUMNS: TableColumnType[] = [
-  { key: 'music', label: 'Music', icon: MusicIcon },
-  { key: 'artist', label: 'Artist', icon: ArtistIcon },
-  { key: 'category', label: 'Category', icon: null },
-  { key: 'bpm', label: 'BPM', icon: BpmIcon },
-  { key: 'rating', label: 'Rating', icon: null },
-  { key: 'addedBy', label: 'Added By', icon: null },
-  { key: 'link', label: 'Listen', icon: HeadphonesIcon },
+  { key: "music", label: "Music", icon: MusicIcon },
+  { key: "artist", label: "Artist", icon: ArtistIcon },
+  { key: "category", label: "Category", icon: CategoryIcon },
+  { key: "rating", label: "Rating", icon: RatingIcon },
+  { key: "addedBy", label: "Added By", icon: AddedByIcon },
+  { key: "link", label: "Link", icon: LinkIcon },
 ];
 
 export default TABLE_COLUMNS;

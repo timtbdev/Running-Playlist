@@ -52,7 +52,7 @@ export function getMinutes(minutes: number) {
 }
 
 // Utility functions
-export const truncateText = (text: string, maxLength = 20): string => {
+export const truncateText = (text: string, maxLength = 40): string => {
   return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
 };
 

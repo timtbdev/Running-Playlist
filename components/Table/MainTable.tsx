@@ -8,10 +8,8 @@ import {
 import TABLE_COLUMNS from "@/constants/table-columns";
 import { truncateText } from "@/lib/utils";
 import type { MusicType } from "@/types";
-import { ActivityIcon as BpmIcon } from "lucide-react";
 import AvatarCell from "./columns/AddedBy";
 import ArtistCell from "./columns/Artist";
-import BPMCell from "./columns/BPM";
 import CategoryCell from "./columns/Category";
 import ListenCell from "./columns/listen/Listen";
 import MusicCell from "./columns/Music";
@@ -32,7 +30,10 @@ export default function MainTable({ data }: MainTableProps) {
               className={column.key !== "link" ? "border-r" : ""}
               key={column.key}
             >
-              {column.label}
+              <div className="flex items-center gap-2">
+                {column.icon && <column.icon className="size-4" />}
+                {column.label}
+              </div>
             </TableHead>
           ))}
         </TableRow>
@@ -43,7 +44,6 @@ export default function MainTable({ data }: MainTableProps) {
             <MusicCell music={truncateText(item.music)} />
             <ArtistCell artist={truncateText(item.artist)} />
             <CategoryCell category={item.category} />
-            <BPMCell icon={BpmIcon}>{item.bpm}</BPMCell>
             <RatingCell rating={item.rating} />
             <AvatarCell user={item.addedBy} />
             <ListenCell

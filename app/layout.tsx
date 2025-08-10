@@ -29,8 +29,10 @@ const validateSEOConfig = () => {
   if (!(FAVICONS && FAVICONS.icon) || FAVICONS.icon.length === 0) {
     console.warn("🖼️ No favicons configured");
   }
-  if (!(OPEN_GRAPH && OPEN_GRAPH.image && OPEN_GRAPH.twitterImage)) {
-    console.error("📱 OpenGraph configuration is incomplete");
+  if (!OPEN_GRAPH) {
+    console.error("📱 OpenGraph configuration is missing");
+  } else if (!OPEN_GRAPH.image || !OPEN_GRAPH.twitterImage) {
+    console.warn("📱 OpenGraph images are missing");
   }
 };
 
