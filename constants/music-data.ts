@@ -51,7 +51,7 @@ const MUSIC_DATA: MusicType[] = [
       spotify:
         "https://open.spotify.com/track/2CgJilIX5IHSy0XP7D8cc4?si=1741ce67595c441f",
       youtube:
-        "https://www.youtube.com/watch?v=jJjCLC05c2E&list=RDjJjCLC05c2E&start_radio=1",
+        "https://www.youtube.com/watch?v=Ag-g1zYPNKc&list=RDAg-g1zYPNKc&start_radio=1",
       appleMusic:
         "https://music.apple.com/us/song/fidale-i-feel-extended-vocal-version/1712700198",
       soundcloud:
