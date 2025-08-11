@@ -1,9 +1,8 @@
-import type React from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 
-const RunningManIcon: React.FC<{ className?: string }> = ({ className }) => (
+const RunningManIcon = ({ className }: { className?: string }) => (
   <svg
-    className={cn('size-full', className)}
+    className={cn("size-full", className)}
     fill="none"
     height="418"
     viewBox="0 0 264 418"

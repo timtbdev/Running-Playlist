@@ -1,6 +1,6 @@
-import { TableCell } from '@/components/ui/table';
-import CATEGORIES from '@/constants/categories';
-import { cn } from '@/lib/utils';
+import { TableCell } from "@/components/ui/table";
+import CATEGORIES from "@/constants/categories";
+import { cn } from "@/lib/utils";
 
 interface CategoryCellProps {
   category: string;
@@ -19,7 +19,7 @@ const CategoryCell = ({ category }: CategoryCellProps) => {
     <TableCell className="border-r">
       <div
         className={cn(
-          'flex items-center gap-1 rounded-md border px-2 py-1',
+          "flex items-center gap-1 rounded-md border px-2 py-1",
           config.backgroundLight,
           config.border,
           config.text

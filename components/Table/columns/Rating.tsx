@@ -1,7 +1,6 @@
-import { ArrowDown, ArrowUp } from 'lucide-react';
-import React from 'react';
-import { Button } from '@/components/ui/button';
-import { TableCell } from '@/components/ui/table';
+import { ArrowDown, ArrowUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { TableCell } from "@/components/ui/table";
 
 interface RatingCellProps {
   rating: number;
