@@ -1,5 +1,6 @@
 import { cn, getYoutubeId } from "@/lib/utils";
 import { StreamingPlatform } from "@/types";
+import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { memo } from "react";
 import YoutubePlayer from "./YoutubePlayer";
@@ -30,9 +31,10 @@ const PlatformLink = memo(
         href={url}
         rel="noopener noreferrer"
         target="_blank"
-        className="mx-auto flex w-full flex-col gap-y-2 rounded-md border p-2 transition-colors hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+        className="group relative mx-auto flex w-full flex-col gap-y-2 rounded-md border p-2 transition-colors hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
         aria-label={`Listen on ${platform.name}`}
       >
+        <ExternalLink className="group-hover:text-foreground absolute top-2 right-2 size-4 text-white" />
         <div className="flex items-center justify-center">
           <platform.icon className={cn(platform.color, "size-6")} />
         </div>
