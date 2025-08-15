@@ -1,6 +1,6 @@
 import { Toaster } from "@/components/ui/sonner";
 import TailwindIndicator from "@/components/ui/tailwind-indicator";
-import { AUTHOR, FAVICONS, HEAD, KEYWORDS, OPEN_GRAPH } from "@/config/seo";
+import { AUTHOR, FAVICONS, HEAD, KEYWORDS, OPEN_GRAPH } from "@/constants/seo";
 import { cn, getBaseUrl } from "@/lib/utils";
 import type { HeadType } from "@/types";
 import { Analytics } from "@vercel/analytics/next";
