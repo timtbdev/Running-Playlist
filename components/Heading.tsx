@@ -1,16 +1,20 @@
-import type { FC, ReactNode } from "react";
-
 interface HeadingProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
-const GridSVG: FC<{
+const GridSVG = ({
+  id,
+  className,
+  x,
+  height = "100%",
+  width = "100%",
+}: {
   id: string;
   className: string;
-  x?: string;
-  height?: string;
-  width?: string;
-}> = ({ id, className, x, height = "100%", width = "100%" }) => (
+  x: string;
+  height: string;
+  width: string;
+}) => (
   <svg className={className} height={height} width={width}>
     <title>Grid pattern background</title>
     <defs>
@@ -34,7 +38,7 @@ const GridSVG: FC<{
   </svg>
 );
 
-const Heading: FC<HeadingProps> = ({ children }) => (
+const Heading = ({ children }: HeadingProps) => (
   <header className="relative overflow-hidden bg-white">
     {/* Background grid pattern */}
     <div className="pointer-events-none absolute inset-y-0 left-1/2 w-[1800px] -translate-x-1/2 [mask-image:linear-gradient(transparent,black)] [mask-composite:intersect] opacity-100">
@@ -44,6 +48,7 @@ const Heading: FC<HeadingProps> = ({ children }) => (
           height="600px"
           id="grid-left"
           width="360px"
+          x="0"
         />
         <GridSVG
           className="heading-grid-border pointer-events-none absolute inset-[unset] bottom-0 left-full h-[600px] w-[360px] [mask-image:linear-gradient(270deg,transparent,black)]"
@@ -61,6 +66,7 @@ const Heading: FC<HeadingProps> = ({ children }) => (
         className="heading-grid-border pointer-events-none absolute inset-[unset] bottom-0 left-1/2 h-[600px] max-w-5xl -translate-x-1/2"
         height="600px"
         id="grid-center"
+        width="100%"
         x="-1"
       />
     </div>

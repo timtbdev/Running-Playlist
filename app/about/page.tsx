@@ -13,7 +13,7 @@ export default function AboutPage() {
           marathon or just going for a casual jog, we've got you covered.
         </p>
         <p className="mb-4">Features include:</p>
-        <ul className="list-disc pl-6 mb-4">
+        <ul className="mb-4 list-disc pl-6">
           <li>Curated playlists for different running intensities</li>
           <li>Music recommendations based on your pace</li>
           <li>Community-driven playlist sharing</li>

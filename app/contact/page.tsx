@@ -12,17 +12,17 @@ export default function ContactPage() {
         </p>
         <div className="space-y-4">
           <div>
-            <h2 className="text-xl font-semibold mb-2">Email</h2>
+            <h2 className="mb-2 text-xl font-semibold">Email</h2>
             <p>hello@playlist.fan</p>
           </div>
           <div>
-            <h2 className="text-xl font-semibold mb-2">Social Media</h2>
+            <h2 className="mb-2 text-xl font-semibold">Social Media</h2>
             <p>
               Follow us on Twitter and Instagram for updates and running tips.
             </p>
           </div>
           <div>
-            <h2 className="text-xl font-semibold mb-2">Feedback</h2>
+            <h2 className="mb-2 text-xl font-semibold">Feedback</h2>
             <p>
               Have ideas for new features or improvements? We're always looking
               to make Playlist.fan better for runners like you.

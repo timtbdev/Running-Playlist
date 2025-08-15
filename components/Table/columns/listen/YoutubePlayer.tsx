@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import Youtube, { type YouTubeProps } from 'react-youtube';
+import Youtube, { type YouTubeProps } from "react-youtube";
 
 interface YoutubePlayerProps {
   videoId: string;
-  opts?: YouTubeProps['opts'];
-  onReady?: YouTubeProps['onReady'];
+  opts?: YouTubeProps["opts"];
+  onReady?: YouTubeProps["onReady"];
 }
 
-const onPlayerReady: YouTubeProps['onReady'] = (event) => {
+const onPlayerReady: YouTubeProps["onReady"] = (event) => {
   // access to player in all event handlers via event.target
   event.target.pauseVideo();
 };
 
-const opts: YouTubeProps['opts'] = {
-  height: '100%',
-  width: '100%',
+const opts: YouTubeProps["opts"] = {
+  height: "100%",
+  width: "100%",
   playerVars: {
     // https://developers.google.com/youtube/player_parameters
     autoplay: 1,

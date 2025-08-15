@@ -12,14 +12,6 @@ export type AuthorType = {
   email: string;
 };
 
-export type NavigationLink = {
-  href: string;
-  label: string;
-  description?: string;
-  icon?: React.ComponentType<{ className?: string }>;
-  subNavigationLinks?: NavigationLink[];
-};
-
 export type MusicType = {
   id: string;
   music: string;

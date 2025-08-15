@@ -1,6 +1,6 @@
-import { ArrowDown, ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TableCell } from "@/components/ui/table";
+import { ArrowDown, ArrowUp } from "lucide-react";
 
 interface RatingCellProps {
   rating: number;
@@ -18,7 +18,7 @@ const RatingCell = ({ rating }: RatingCellProps) => {
             <ArrowDown className="h-4 w-4 cursor-pointer text-red-600 transition-all duration-200 ease-in-out hover:scale-110" />
           </Button>
         </div>
-        <span className="font-medium text-gray-600 text-sm">
+        <span className="text-sm font-medium text-gray-600">
           {rating > 0 ? `+${rating}` : rating}
         </span>
       </div>

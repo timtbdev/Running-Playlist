@@ -4,13 +4,13 @@ import Link from "next/link";
 
 const Categories = () => {
   return (
-    <section aria-labelledby="categories-heading">
+    <section aria-labelledby="categories-heading" className="hidden md:block">
       <ul className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
         {CATEGORIES.map((category) => (
           <Link
             className={cn(
               "group col-span-1 flex rounded-md border",
-              category.border
+              category.border,
             )}
             href={`/categories/${category.slug}`}
             key={category.name}
@@ -19,7 +19,7 @@ const Categories = () => {
               className={cn(
                 "flex w-16 shrink-0 items-center justify-center rounded-l-md border-r text-sm font-medium transition-colors duration-200",
                 category.backgroundDark,
-                category.border
+                category.border,
               )}
             >
               <category.icon
@@ -30,7 +30,7 @@ const Categories = () => {
             <div
               className={cn(
                 "flex flex-1 items-center justify-between truncate rounded-r-md bg-white",
-                category.groupHover
+                category.groupHover,
               )}
             >
               <div className="flex-1 truncate px-4 py-2 text-sm">
